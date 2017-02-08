@@ -1,0 +1,42 @@
+{
+  "name": "hermes",
+  "version": "0.0.1",
+  "description": "Abstractions to simplify working with the RabbitMQ",
+  "main": "src/index.js",
+  "repository": "",
+  "scripts": {
+    "lint": "jshint ./",
+    "test": "gulp test-and-exit"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": "Lendico Brazil",
+  "contributors": [
+    {
+      "name": "Somar Onurb",
+      "email": "bruno.kruz@gmail.com",
+      "url": "https://github.com/BrunoKruz"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "biggulp": "*",
+    "chai": "*",
+    "chai-as-promised": "*",
+    "gulp": "*",
+    "sinon": "*",
+    "sinon-as-promised": "*"
+  },
+  "dependencies": {
+    "amqplib": "*",
+    "debug": "*",
+    "lodash": "*",
+    "machina": "*",
+    "monologue.js": "*",
+    "node-uuid": "*",
+    "postal": "*",
+    "when": "*",
+    "whistlepunk": "*"
+  }
+}
