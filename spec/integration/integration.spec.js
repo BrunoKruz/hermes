@@ -107,39 +107,39 @@ describe( 'Integration Test Suite', function() {
 					},
 					exchanges: [
 						{
-							name: 'wascally-ex.direct',
+							name: 'hermes-ex.direct',
 							type: 'direct',
 							autoDelete: true
 						},
 						{
-							name: 'wascally-ex.topic',
+							name: 'hermes-ex.topic',
 							type: 'topic',
-							alternate: 'wascally-ex.alternate',
+							alternate: 'hermes-ex.alternate',
 							autoDelete: true
 						}
 					],
 					queues: [
 						{
-							name: 'wascally-q.direct',
+							name: 'hermes-q.direct',
 							autoDelete: true,
 							subscribe: true
 						},
 						{
-							name: 'wascally-q.topic',
+							name: 'hermes-q.topic',
 							autoDelete: true,
 							subscribe: true,
-							deadletter: 'wascally-ex.deadletter'
+							deadletter: 'hermes-ex.deadletter'
 						}
 					],
 					bindings: [
 						{
-							exchange: 'wascally-ex.direct',
-							target: 'wascally-q.direct',
+							exchange: 'hermes-ex.direct',
+							target: 'hermes-q.direct',
 							keys: ''
 						},
 						{
-							exchange: 'wascally-ex.topic',
-							target: 'wascally-q.topic',
+							exchange: 'hermes-ex.topic',
+							target: 'hermes-q.topic',
 							keys: '#'
 						}
 					]
@@ -149,7 +149,7 @@ describe( 'Integration Test Suite', function() {
 			it( 'should fail to connect', function() {
 				return rabbit.configure( config )
 					.should.be.rejectedWith(
-					'Failed to create exchange \'wascally-ex.direct\' on connection \'silly2\' with \'No endpoints could be reached\''
+					'Failed to create exchange \'hermes-ex.direct\' on connection \'silly2\' with \'No endpoints could be reached\''
 				);
 			} );
 
@@ -164,9 +164,9 @@ describe( 'Integration Test Suite', function() {
 		before( function( done ) {
 			harness = harnessFn( done, 3 );
 			harness.handle( 'topic' );
-			rabbit.publish( 'wascally-ex.topic', { type: 'topic', routingKey: 'this.is.a.test', body: 'broadcast' } );
-			rabbit.publish( 'wascally-ex.topic', { type: 'topic', routingKey: 'this.is.sparta', body: 'leonidas' } );
-			rabbit.publish( 'wascally-ex.topic', { type: 'topic', routingKey: 'a.test.this.is', body: 'yoda' } );
+			rabbit.publish( 'hermes-ex.topic', { type: 'topic', routingKey: 'this.is.a.test', body: 'broadcast' } );
+			rabbit.publish( 'hermes-ex.topic', { type: 'topic', routingKey: 'this.is.sparta', body: 'leonidas' } );
+			rabbit.publish( 'hermes-ex.topic', { type: 'topic', routingKey: 'a.test.this.is', body: 'yoda' } );
 		} );
 
 		it( 'should route all messages correctly', function() {
@@ -194,7 +194,7 @@ describe( 'Integration Test Suite', function() {
 		before( function( done ) {
 			harness = harnessFn( done, 2 );
 			harness.handle( 'fanned' );
-			rabbit.publish( 'wascally-ex.fanout', { type: 'fanned', routingKey: 'this.is.ignored', body: 'hello, everyone' } );
+			rabbit.publish( 'hermes-ex.fanout', { type: 'fanned', routingKey: 'this.is.ignored', body: 'hello, everyone' } );
 		} );
 
 		it( 'should route all messages correctly', function() {
@@ -220,8 +220,8 @@ describe( 'Integration Test Suite', function() {
 		var harness;
 		before( function( done ) {
 			harness = harnessFn( done, 2 );
-			rabbit.publish( 'wascally-ex.direct', { type: 'junk', routingKey: '', body: 'uh oh' } );
-			rabbit.publish( 'wascally-ex.direct', { type: 'garbage', routingKey: '', body: 'uh oh' } );
+			rabbit.publish( 'hermes-ex.direct', { type: 'junk', routingKey: '', body: 'uh oh' } );
+			rabbit.publish( 'hermes-ex.direct', { type: 'garbage', routingKey: '', body: 'uh oh' } );
 		} );
 
 		it( 'should capture messages according to unhandled strategy', function() {
@@ -248,9 +248,9 @@ describe( 'Integration Test Suite', function() {
 		before( function( done ) {
 			harness = harnessFn( done, 3 );
 			harness.handle( 'deadend' );
-			rabbit.publish( 'wascally-ex.deadend', { type: 'deadend', routingKey: 'empty', body: 'one' } );
-			rabbit.publish( 'wascally-ex.deadend', { type: 'deadend', routingKey: 'nothing', body: 'two' } );
-			rabbit.publish( 'wascally-ex.deadend', { type: 'deadend', routingKey: 'de.nada', body: 'three' } );
+			rabbit.publish( 'hermes-ex.deadend', { type: 'deadend', routingKey: 'empty', body: 'one' } );
+			rabbit.publish( 'hermes-ex.deadend', { type: 'deadend', routingKey: 'nothing', body: 'two' } );
+			rabbit.publish( 'hermes-ex.deadend', { type: 'deadend', routingKey: 'de.nada', body: 'three' } );
 		} );
 
 		it( 'should route all messages correctly', function() {
@@ -290,14 +290,14 @@ describe( 'Integration Test Suite', function() {
 				q.reply( '...' );
 			} );
 
-			rabbit.request( 'wascally-ex.request', { type: 'polite', body: 'how are you?' } )
+			rabbit.request( 'hermes-ex.request', { type: 'polite', body: 'how are you?' } )
 				.then( function( response ) {
 					response1 = response.body;
 					harness.add( response );
 					response.ack();
 				} );
 
-			rabbit.request( 'wascally-ex.request', { type: 'rude', body: 'why so dumb?' } )
+			rabbit.request( 'hermes-ex.request', { type: 'rude', body: 'why so dumb?' } )
 				.then( function( response ) {
 					response2 = response.body;
 					harness.add( response );
@@ -309,7 +309,7 @@ describe( 'Integration Test Suite', function() {
 				part.ack();
 				harness.add( part );
 			}
-			rabbit.request( 'wascally-ex.request', { type: 'crazy', body: 'do you like my yak-hair-shirt?' } )
+			rabbit.request( 'hermes-ex.request', { type: 'crazy', body: 'do you like my yak-hair-shirt?' } )
 				.progress( onPart )
 				.then( function( response ) {
 					onPart( response );
@@ -360,7 +360,7 @@ describe( 'Integration Test Suite', function() {
 					harness.add( env );
 				} )
 			);
-			rabbit.publish( 'wascally-ex.topic', { type: 'reject', routingKey: 'this.is.rejection', body: 'haters gonna hate' } );
+			rabbit.publish( 'hermes-ex.topic', { type: 'reject', routingKey: 'this.is.rejection', body: 'haters gonna hate' } );
 		} );
 
 		it( 'receive message from bound queue and dead-letter queue', function() {
@@ -373,8 +373,8 @@ describe( 'Integration Test Suite', function() {
 			} );
 			results.should.eql(
 				[
-					{ body: 'haters gonna hate', key: 'this.is.rejection', exchange: 'wascally-ex.topic' },
-					{ body: 'haters gonna hate', key: 'this.is.rejection', exchange: 'wascally-ex.deadletter' }
+					{ body: 'haters gonna hate', key: 'this.is.rejection', exchange: 'hermes-ex.topic' },
+					{ body: 'haters gonna hate', key: 'this.is.rejection', exchange: 'hermes-ex.deadletter' }
 				] );
 		} );
 
@@ -391,7 +391,7 @@ describe( 'Integration Test Suite', function() {
 			harness = harnessFn( done, limit );
 			harness.handle( 'balanced' );
 			for (var i = 0; i < limit; i++) {
-				rabbit.publish( 'wascally-ex.consistent-hash', { type: 'balanced', correlationId: ( i + i ).toString(), body: 'message ' + i } );
+				rabbit.publish( 'hermes-ex.consistent-hash', { type: 'balanced', correlationId: ( i + i ).toString(), body: 'message ' + i } );
 			}
 		} );
 
@@ -439,7 +439,7 @@ describe( 'Integration Test Suite', function() {
 			} );
 
 			for (var i = 0; i < messagesToSend; i++) {
-				rabbit.publish( 'wascally-ex.no-batch', {
+				rabbit.publish( 'hermes-ex.no-batch', {
 					type: 'no.batch',
 					body: 'message ' + i,
 					routingKey: ''
@@ -457,10 +457,10 @@ describe( 'Integration Test Suite', function() {
 		before( function( done ) {
 			harness = harnessFn( done, 3 );
 			harness.handle( '#.a' );
-			rabbit.publish( 'wascally-ex.topic', { type: 'one.a', routingKey: 'this.is.one', body: 'one' } );
-			rabbit.publish( 'wascally-ex.topic', { type: 'two.i.a', routingKey: 'this.is.two', body: 'two' } );
-			rabbit.publish( 'wascally-ex.topic', { type: 'three-b.a', routingKey: 'this.is.three', body: 'three' } );
-			rabbit.publish( 'wascally-ex.topic', { type: 'a.four', routingKey: 'this.is.four', body: 'four' } );
+			rabbit.publish( 'hermes-ex.topic', { type: 'one.a', routingKey: 'this.is.one', body: 'one' } );
+			rabbit.publish( 'hermes-ex.topic', { type: 'two.i.a', routingKey: 'this.is.two', body: 'two' } );
+			rabbit.publish( 'hermes-ex.topic', { type: 'three-b.a', routingKey: 'this.is.three', body: 'three' } );
+			rabbit.publish( 'hermes-ex.topic', { type: 'a.four', routingKey: 'this.is.four', body: 'four' } );
 		} );
 
 		it( 'should handle all message types ending in "a"', function() {
@@ -493,7 +493,7 @@ describe( 'Integration Test Suite', function() {
 		before( function( done ) {
 			harness = harnessFn( done, 1 );
 			harness.handle( '#.typeless' );
-			rabbit.publish( 'wascally-ex.topic', { type: '', routingKey: 'this.is.typeless', body: 'one' } );
+			rabbit.publish( 'hermes-ex.topic', { type: '', routingKey: 'this.is.typeless', body: 'one' } );
 		} );
 
 		it( 'should handle based on topic', function() {
@@ -516,7 +516,7 @@ describe( 'Integration Test Suite', function() {
 
 	after( function() {
 		this.timeout( 5000 );
-		rabbit.deleteExchange( 'wascally-ex.deadend' ).then( function() {} );
+		rabbit.deleteExchange( 'hermes-ex.deadend' ).then( function() {} );
 		return rabbit.closeAll().then( function() {
 			rabbit.reset();
 		} );

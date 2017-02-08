@@ -11,44 +11,44 @@ module.exports = {
 
 	exchanges: [
 		{
-			name: 'wascally-ex.direct',
+			name: 'hermes-ex.direct',
 			type: 'direct',
 			autoDelete: true
 		},
 		{
-			name: 'wascally-ex.topic',
+			name: 'hermes-ex.topic',
 			type: 'topic',
-			alternate: 'wascally-ex.alternate',
+			alternate: 'hermes-ex.alternate',
 			autoDelete: true
 		},
 		{
-			name: 'wascally-ex.fanout',
+			name: 'hermes-ex.fanout',
 			type: 'fanout',
 			autoDelete: true
 		},
 		{
-			name: 'wascally-ex.request',
+			name: 'hermes-ex.request',
 			type: 'fanout',
 			autoDelete: true
 		},
 		{
-			name: 'wascally-ex.deadend',
+			name: 'hermes-ex.deadend',
 			type: 'fanout',
-			alternate: 'wascally-ex.alternate',
+			alternate: 'hermes-ex.alternate',
 			autoDelete: true
 		},
 		{
-			name: 'wascally-ex.alternate',
-			type: 'fanout',
-			autoDelete: true
-		},
-		{
-			name: 'wascally-ex.deadletter',
+			name: 'hermes-ex.alternate',
 			type: 'fanout',
 			autoDelete: true
 		},
 		{
-			name: 'wascally-ex.consistent-hash',
+			name: 'hermes-ex.deadletter',
+			type: 'fanout',
+			autoDelete: true
+		},
+		{
+			name: 'hermes-ex.consistent-hash',
 			type: 'x-consistent-hash',
 			autoDelete: true,
 			arguments: {
@@ -56,7 +56,7 @@ module.exports = {
 			}
 		},
 		{
-			name: 'wascally-ex.no-batch',
+			name: 'hermes-ex.no-batch',
 			type: 'direct',
 			autoDelete: true
 		}
@@ -64,65 +64,65 @@ module.exports = {
 
 	queues: [
 		{
-			name: 'wascally-q.direct',
+			name: 'hermes-q.direct',
 			autoDelete: true,
 			subscribe: true
 		},
 		{
-			name: 'wascally-q.topic',
+			name: 'hermes-q.topic',
 			autoDelete: true,
 			subscribe: true,
-			deadletter: 'wascally-ex.deadletter'
+			deadletter: 'hermes-ex.deadletter'
 		},
 		{
-			name: 'wascally-q.general1',
+			name: 'hermes-q.general1',
 			noAck: true,
 			autoDelete: true,
 			subscribe: true
 		},
 		{
-			name: 'wascally-q.general2',
+			name: 'hermes-q.general2',
 			noAck: true,
 			autoDelete: true,
 			subscribe: true
 		},
 		{
-			name: 'wascally-q.request',
+			name: 'hermes-q.request',
 			autoDelete: true,
 			subscribe: true
 		},
 		{
-			name: 'wascally-q.alternate',
+			name: 'hermes-q.alternate',
 			autoDelete: true,
 			subscribe: true
 		},
 		{
-			name: 'wascally-q.deadletter',
+			name: 'hermes-q.deadletter',
 			autoDelete: true,
 			subscribe: true
 		},
 		{
-			name: 'wascally-q.hashed1',
+			name: 'hermes-q.hashed1',
 			autoDelete: true,
 			subscribe: true
 		},
 		{
-			name: 'wascally-q.hashed2',
+			name: 'hermes-q.hashed2',
 			autoDelete: true,
 			subscribe: true
 		},
 		{
-			name: 'wascally-q.hashed3',
+			name: 'hermes-q.hashed3',
 			autoDelete: true,
 			subscribe: true
 		},
 		{
-			name: 'wascally-q.hashed4',
+			name: 'hermes-q.hashed4',
 			autoDelete: true,
 			subscribe: true
 		},
 		{
-			name: 'wascally-q.no-batch',
+			name: 'hermes-q.no-batch',
 			autoDelete: true,
 			subscribe: true,
 			noBatch: true,
@@ -132,63 +132,63 @@ module.exports = {
 
 	bindings: [
 		{
-			exchange: 'wascally-ex.direct',
-			target: 'wascally-q.direct',
+			exchange: 'hermes-ex.direct',
+			target: 'hermes-q.direct',
 			keys: ''
 		},
 		{
-			exchange: 'wascally-ex.topic',
-			target: 'wascally-q.topic',
+			exchange: 'hermes-ex.topic',
+			target: 'hermes-q.topic',
 			keys: 'this.is.*'
 		},
 		{
-			exchange: 'wascally-ex.fanout',
-			target: 'wascally-q.general1',
+			exchange: 'hermes-ex.fanout',
+			target: 'hermes-q.general1',
 			keys: []
 		},
 		{
-			exchange: 'wascally-ex.fanout',
-			target: 'wascally-q.general2',
+			exchange: 'hermes-ex.fanout',
+			target: 'hermes-q.general2',
 			keys: []
 		},
 		{
-			exchange: 'wascally-ex.request',
-			target: 'wascally-q.request',
+			exchange: 'hermes-ex.request',
+			target: 'hermes-q.request',
 			keys: []
 		},
 		{
-			exchange: 'wascally-ex.deadletter',
-			target: 'wascally-q.deadletter',
+			exchange: 'hermes-ex.deadletter',
+			target: 'hermes-q.deadletter',
 			keys: []
 		},
 		{
-			exchange: 'wascally-ex.alternate',
-			target: 'wascally-q.alternate',
+			exchange: 'hermes-ex.alternate',
+			target: 'hermes-q.alternate',
 			keys: []
 		},
 		{
-			exchange: 'wascally-ex.consistent-hash',
-			target: 'wascally-q.hashed1',
+			exchange: 'hermes-ex.consistent-hash',
+			target: 'hermes-q.hashed1',
 			keys: '100'
 		},
 		{
-			exchange: 'wascally-ex.consistent-hash',
-			target: 'wascally-q.hashed2',
+			exchange: 'hermes-ex.consistent-hash',
+			target: 'hermes-q.hashed2',
 			keys: '100'
 		},
 		{
-			exchange: 'wascally-ex.consistent-hash',
-			target: 'wascally-q.hashed3',
+			exchange: 'hermes-ex.consistent-hash',
+			target: 'hermes-q.hashed3',
 			keys: '100'
 		},
 		{
-			exchange: 'wascally-ex.consistent-hash',
-			target: 'wascally-q.hashed4',
+			exchange: 'hermes-ex.consistent-hash',
+			target: 'hermes-q.hashed4',
 			keys: '100'
 		},
 		{
-			exchange: 'wascally-ex.no-batch',
-			target: 'wascally-q.no-batch'
+			exchange: 'hermes-ex.no-batch',
+			target: 'hermes-q.no-batch'
 		}
 	]
 };

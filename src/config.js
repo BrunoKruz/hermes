@@ -1,5 +1,5 @@
 var when = require( 'when' );
-var log = require( './log' )( 'wascally.configuration' );
+var log = require( './log' )( 'hermes.configuration' );
 
 module.exports = function( Broker ) {
 
