@@ -1,5 +1,5 @@
 {
-  "name": "hermes",
+  "name": "lendico-hermes",
   "version": "0.0.1",
   "description": "Abstractions to simplify working with the RabbitMQ",
   "main": "src/index.js",
