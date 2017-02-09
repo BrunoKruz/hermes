@@ -1,6 +1,6 @@
 {
   "name": "lendico-hermes",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Abstractions to simplify working with the RabbitMQ",
   "main": "src/index.js",
   "repository": "",
