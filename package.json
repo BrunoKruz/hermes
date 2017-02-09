@@ -1,6 +1,6 @@
 {
   "name": "lendico-hermes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Abstractions to simplify working with the RabbitMQ",
   "main": "src/index.js",
   "repository": "",
@@ -29,14 +29,14 @@
     "sinon-as-promised": "*"
   },
   "dependencies": {
-    "amqplib": "*",
-    "debug": "*",
-    "lodash": "*",
-    "machina": "*",
-    "monologue.js": "*",
-    "node-uuid": "*",
-    "postal": "*",
-    "when": "*",
-    "whistlepunk": "*"
+    "amqplib": "~0.4.0",
+    "debug": "^2.2.0",
+    "lodash": "^3.10.1",
+    "machina": "^1.1.2",
+    "monologue.js": "^0.3.4",
+    "node-uuid": "^1.4.7",
+    "postal": "^1.0.7",
+    "when": "^3.7.5",
+    "whistlepunk": "^0.3.2"
   }
 }
