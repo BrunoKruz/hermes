@@ -22,7 +22,7 @@ This is a abstraction over amqplib to help simplify certain common tasks and red
 
 ### Publish
 
-The publish call returns a promise that is only resolved once the broker has accepted responsibility for the message (see [Publisher Acknowledgments](https://www.rabbitmq.com/confirms.html) for more details). If a configured timeout is reached, or in the rare event that the broker rejects the message, the promise will be rejected. More commonly, the connection to the broker could be lost before the message is confirmed and you end up with a message in "limbo", but we keeps a list of unconfirmed messages that have been published _in "memory" only_. Once a connection is re-established and the topology is in place, Wascally will prioritize re-sending these messages before sending anything else.
+The publish call returns a promise that is only resolved once the broker has accepted responsibility for the message (see [Publisher Acknowledgments](https://www.rabbitmq.com/confirms.html) for more details). If a configured timeout is reached, or in the rare event that the broker rejects the message, the promise will be rejected. More commonly, the connection to the broker could be lost before the message is confirmed and you end up with a message in "limbo", but we keeps a list of unconfirmed messages that have been published _in "memory" only_. 
 
 ### CONFIG FILE 
 
