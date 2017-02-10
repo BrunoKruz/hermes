@@ -49,11 +49,10 @@ The publish call returns a promise that is only resolved once the broker has acc
 ### Publishing Messages
 
 ```javascript
+
 // the first 3 arguments are required
 // routing key is optional and defaults to the value of typeName
 // connectionName is only needed if you have multiple connections to different servers or vhosts
-
-ct';
 
 var rabbit = require('lendico-hermes');
 var rabbitcon = require('./../config.js');
@@ -64,7 +63,6 @@ var publish = function (msg) {
   return rabbit.configure(config)
         .then(sendMessage(msg))
         .then(undefined, reportErrors);
-//process.exit();
 };
 
 function reportErrors (err) {
