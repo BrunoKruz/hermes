@@ -30,7 +30,9 @@ var Broker = function() {
 
 Broker.prototype.addConnection = function( options ) {
 	var name = options ? ( options.name || 'default' ) : 'default';
-	if ( !this.connections[ name ] ) {
+	
+	//TODO: Implement method to check if the server is alive
+	//if ( !this.connections[ name ] ) {
 		var connection = connectionFn( options || {} );
 		var topology = topologyFn( connection, options || {}, unhandledStrategies );
 		connection.on( 'connected', function( state ) {
@@ -49,9 +51,9 @@ Broker.prototype.addConnection = function( options ) {
 		}.bind( this ) );
 		this.connections[ name ] = topology;
 		return topology;
-	} else {
+	/*} else {
 		return this.connections[ name ];
-	}
+	} */
 };
 
 Broker.prototype.addExchange = function( name, type, options, connectionName ) {

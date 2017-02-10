@@ -7,6 +7,7 @@ module.exports = function( Broker ) {
 		// convenience method to add connection and build up using specified configuration
 		// normally, the approach here might be a bit pedantic, but it's preferable
 		// to the pyramid of doom callbacks
+			console.log('create exchanges ok');
 		if( config.logging ) {
 			require( './log' )( config.logging || {} );
 		}
@@ -30,8 +31,15 @@ module.exports = function( Broker ) {
 			}
 
 			function createExchanges() {
-				connection.configureExchanges( config.exchanges )
+
+				try{
+					console.log('create exchanges ok');
+                    connection.configureExchanges( config.exchanges )
 					.then( createQueues, onExchangeError );
+				}catch(r){
+					console.log('create exchanges error', r);
+				}
+				
 			}
 
 			function createQueues() {
